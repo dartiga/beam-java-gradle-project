@@ -1,0 +1,29 @@
+plugins {
+  id 'java'
+  id 'com.github.johnrengelman.shadow' version '2.0.4'
+}
+
+ext.versions = [
+	beam    : '2.4.+',
+	logback : '1.2.+',
+	kafka   : '0.10',
+]
+
+repositories {
+	jcenter()
+}
+
+dependencies {
+    compile "org.apache.beam:beam-sdks-java-core:${versions.beam}"
+    compile "org.apache.beam:beam-runners-direct-java:${versions.beam}"
+
+	testRuntime "ch.qos.logback:logback-classic:${versions.logback}"
+}
+
+shadowJar {
+	zip64 = true
+}
+
+wrapper {
+	gradleVersion = 4.8
+}
